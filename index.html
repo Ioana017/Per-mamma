@@ -351,7 +351,7 @@
 
     <!-- Audio rilassante -->
     <audio id="relaxingAudio" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        <source src="relaxing.wav" type="audio/wav">
     </audio>
 
     <!-- Pulsante per controllo audio -->
@@ -367,7 +367,7 @@
         audioPlayer.addEventListener('click', function() {
             if (relaxingAudio.paused) {
                 relaxingAudio.play().catch(error => {
-                    console.log('Errore nella riproduzione audio:', error);
+                    console.log('Errore:', error);
                 });
                 audioPlayer.classList.add('playing');
             } else {
