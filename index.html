@@ -222,6 +222,40 @@
         .image-container img:hover {
             transform: scale(1.03);
         }
+
+        .audio-player {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+            background: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(118, 75, 162, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid #667eea;
+        }
+
+        .audio-player:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 35px rgba(118, 75, 162, 0.6);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .audio-player.playing {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .audio-player .icon {
+            font-size: 1.8em;
+        }
     </style>
 </head>
 <body>
@@ -315,7 +349,33 @@
         </div>
     </div>
 
+    <!-- Audio rilassante -->
+    <audio id="relaxingAudio" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Pulsante per controllo audio -->
+    <div class="audio-player" id="audioPlayer" title="Riproduci musica rilassante">
+        <span class="icon">🎵</span>
+    </div>
+
     <script>
+        // Controllo audio
+        const audioPlayer = document.getElementById('audioPlayer');
+        const relaxingAudio = document.getElementById('relaxingAudio');
+
+        audioPlayer.addEventListener('click', function() {
+            if (relaxingAudio.paused) {
+                relaxingAudio.play().catch(error => {
+                    console.log('Errore nella riproduzione audio:', error);
+                });
+                audioPlayer.classList.add('playing');
+            } else {
+                relaxingAudio.pause();
+                audioPlayer.classList.remove('playing');
+            }
+        });
+
         // Funzione per creare cuori e baci che volano
         function createFloatingElement() {
             const elements = ['❤️', '💕', '💗', '💖', '💝'];
