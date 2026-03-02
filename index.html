@@ -150,6 +150,60 @@
             border: 2px solid #667eea;
             border-radius: 10px;
         }
+
+        /* Animazioni per cuori e baci */
+        .heart-animation {
+            position: fixed;
+            pointer-events: none;
+            font-size: 2em;
+            animation: fall 4s ease-in forwards;
+            z-index: 10;
+        }
+
+        .kiss-animation {
+            position: fixed;
+            pointer-events: none;
+            font-size: 1.8em;
+            animation: rise 5s ease-out forwards;
+            z-index: 10;
+        }
+
+        @keyframes fall {
+            0% {
+                opacity: 1;
+                transform: translateY(-100vh) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        @keyframes rise {
+            0% {
+                opacity: 1;
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) translateX(100px) rotate(360deg);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
+        }
+
+        .floating-hearts {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            top: 0;
+            pointer-events: none;
+            z-index: 5;
+        }
     </style>
 </head>
 <body>
@@ -238,5 +292,48 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Funzione per creare cuori e baci che volano
+        function createFloatingElement() {
+            const elements = ['❤️', '💕', '💗', '💖', '💝'];
+            const kisses = ['😘', '💋'];
+            
+            // Cuori che cadono
+            if (Math.random() > 0.5) {
+                const element = document.createElement('div');
+                const randomHeart = elements[Math.floor(Math.random() * elements.length)];
+                element.textContent = randomHeart;
+                element.classList.add('heart-animation');
+                element.style.left = Math.random() * 100 + '%';
+                element.style.animationDelay = '0s';
+                element.style.opacity = Math.random() * 0.5 + 0.5;
+                document.body.appendChild(element);
+
+                setTimeout(() => element.remove(), 4000);
+            } 
+            // Baci che salgono
+            else {
+                const element = document.createElement('div');
+                const randomKiss = kisses[Math.floor(Math.random() * kisses.length)];
+                element.textContent = randomKiss;
+                element.classList.add('kiss-animation');
+                element.style.left = Math.random() * 100 + '%';
+                element.style.bottom = '0';
+                element.style.animationDelay = '0s';
+                document.body.appendChild(element);
+
+                setTimeout(() => element.remove(), 5000);
+            }
+        }
+
+        // Genera cuori e baci ogni 800ms
+        setInterval(createFloatingElement, 800);
+
+        // Crea alcuni elementi all'avvio
+        for (let i = 0; i < 3; i++) {
+            setTimeout(createFloatingElement, i * 300);
+        }
+    </script>
 </body>
 </html>
