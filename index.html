@@ -204,6 +204,24 @@
             pointer-events: none;
             z-index: 5;
         }
+
+        .image-container {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .image-container img:hover {
+            transform: scale(1.03);
+        }
     </style>
 </head>
 <body>
@@ -213,6 +231,10 @@
             <div class="emoji-hearts">💕 💕 💕</div>
             <p class="subtitle">Parole dal cuore per la donna più importante della mia vita</p>
         </header>
+
+        <div class="image-container">
+            <img src="image.png" alt="Foto per la mamma">
+        </div>
 
         <div class="content">
             <div class="section">
